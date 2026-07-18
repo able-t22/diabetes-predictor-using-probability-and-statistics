@@ -1,5 +1,5 @@
+from pathlib import Path
 import sys
-sys.path.append("../src")
 
 import streamlit as st
 import pandas as pd
@@ -7,14 +7,32 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 
+# -------------------------------------------------
+# Project paths (Works locally and on Streamlit Cloud)
+# -------------------------------------------------
+
+ROOT = Path(__file__).resolve().parent.parent
+
+SRC_PATH = ROOT / "src"
+
+DATA_PATH = ROOT / "data" / "diabetes.csv"
+
+sys.path.insert(0, str(SRC_PATH))
+
+# -------------------------------------------------
+# Import project modules
+# -------------------------------------------------
+
 from data_loader import load_dataset
 from preprocessing import preprocess
 from bayes import BayesianPredictor
 
-# -----------------------------
+# -------------------------------------------------
 # Load Dataset
-# -----------------------------
-data = load_dataset("../data/diabetes.csv")
+# -------------------------------------------------
+
+data = load_dataset(DATA_PATH)
+
 data = preprocess(data)
 
 predictor = BayesianPredictor(data)
