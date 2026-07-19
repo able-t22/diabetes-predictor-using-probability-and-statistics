@@ -1,20 +1,12 @@
 import os
 import csv
-
 def save_prediction(sample, diabetic_prob, normal_prob):
-
     file = "outputs/prediction_history.csv"
-
     os.makedirs("outputs", exist_ok=True)
-
     file_exists = os.path.isfile(file)
-
     with open(file, "a", newline="") as f:
-
         writer = csv.writer(f)
-
         if not file_exists:
-
             writer.writerow([
                 "Pregnancies",
                 "Glucose",
@@ -27,7 +19,6 @@ def save_prediction(sample, diabetic_prob, normal_prob):
                 "Diabetes %",
                 "Non-Diabetes %"
             ])
-
         writer.writerow([
             sample["Pregnancies"],
             sample["Glucose"],
